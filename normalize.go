@@ -22,6 +22,9 @@ func normalizeForFormat(format string, value any) any {
 	return value
 }
 
+// isZeroValue returns true if the arbitrary value is considered the "zero state" for
+// the given type. That is, if it is a numeric value equal to zero, a boolean value
+// equal to false, and empty string, or a map or array with no elements.
 func isZeroValue(value any) bool {
 	switch v := value.(type) {
 	case []any:
@@ -74,6 +77,9 @@ func isZeroValue(value any) bool {
 // normalizeNumericValues converts numeric values to be either int or float64 values, based
 // on the "wantFloat" flag. This is used to convert JSON-marshalled values (usually float64)
 // to expected numeric types for formatting by the substitution processor.
+//
+// If the numeric value would overflow as an int value and the wantFlat flag is false, the
+// value is returned as math.MaxInt.
 func normalizeNumericValues(value any, wantFloat bool) any {
 	switch v := value.(type) {
 	case int:
@@ -81,11 +87,15 @@ func normalizeNumericValues(value any, wantFloat bool) any {
 			return float64(v)
 		}
 
-		return int(v)
+		return v
 
 	case int32:
 		if wantFloat {
 			return float64(v)
+		}
+
+		if int64(v) > math.MaxInt {
+			return math.MaxInt
 		}
 
 		return int(v)
@@ -93,6 +103,10 @@ func normalizeNumericValues(value any, wantFloat bool) any {
 	case int64:
 		if wantFloat {
 			return float64(v)
+		}
+
+		if v > math.MaxInt {
+			return math.MaxInt
 		}
 
 		return int(v)
@@ -106,7 +120,7 @@ func normalizeNumericValues(value any, wantFloat bool) any {
 		}
 
 		vv := math.Abs(v)
-		if vv == math.Floor(vv) {
+		if vv == math.Floor(vv) && v <= math.MaxInt {
 			return int(v)
 		}
 

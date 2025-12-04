@@ -5,6 +5,11 @@ import (
 	"sort"
 )
 
+// Convert an arbitrary object into an array of strings, using the supplied
+// Go format string as needed.
+//
+// A map becomes and array of key: value pairs expressed as a string value.
+// Arrays become an array of string values.
 func makeArray(values any, format string) []string {
 	var result []string
 

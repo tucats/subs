@@ -1,6 +1,7 @@
 package subs
 
 import (
+	"math"
 	"reflect"
 	"testing"
 )
@@ -27,9 +28,19 @@ func Test_normalizeNumericValues(t *testing.T) {
 			want: int(-5),
 		},
 		{
+			name: "float64 to int overflow",
+			arg:  float64(math.MaxInt) + 100.0,
+			want: int(math.MaxInt),
+		},
+		{
 			name: "float32 to int",
 			arg:  float32(123.000),
 			want: int(123),
+		},
+		{
+			name: "float32 to int overflow",
+			arg:  float32(math.MaxInt) + 100.0,
+			want: int(math.MaxInt),
 		},
 		{
 			name: "int",

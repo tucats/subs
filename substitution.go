@@ -9,10 +9,14 @@ import (
 
 // Substitution is a function that replaces placeholders in a text string with
 // their corresponding values. The function supports arbitrary values, and assumes
-// the substitution expressions in the string match the json query language for
-// Ego. The item(s) are retrieved from a JSON expression of the values passed in.
+// the substitution expressions in the string match the JAXON json query language.
+// The item(s) are retrieved from a JSON expression of the values passed in.
 // Note that if multiple values are passed in, the query must assume that top
 // level type is an array.
+//
+// The result is a string containing the input text with all replacement and formatting
+// operations performed. If errors occur during the substitution, an error message is
+// returned as the replacement value, delimited by "!" characters.
 func Substitution(text string, values ...any) string {
 	var (
 		b   []byte
