@@ -50,20 +50,20 @@ in the substitution operation. If multiple format operations
 are given in a substitution operator, they are processed in order specified.
 
 | Format Operator | Description |
-|-----------------|-------------|
-| lines           | The item is an array, make a separate line for each array element |
-| list            | The item is an array, output each item separated by "," |
-| size n          | If the substitution is longer than `n` characters, truncate with `...` ellipses |
-| pad "a"         | Use the value to write copies of the string "a" to the output |
-| left n          | Left justify the value in a field n characters wide |
-| right n.        | Right justify the value in a field n characters wide |
-| center n.       | Center justify the value in a field n characters wide |
-| empty "text"    | If the value is zero, an empty string, or an empty array, output "text" instead |
+| --------------- | ----------- |
+| lines | The item is an array, make a separate line for each array element |
+| list | The item is an array, output each item separated by "," |
+| size n | If the substitution is longer than `n` characters, truncate with `...` ellipses |
+| pad "a" | Use the value to write copies of the string "a" to the output |
+| left n | Left justify the value in a field n characters wide |
+| right n | Right justify the value in a field n characters wide |
+| center n | Center justify the value in a field n characters wide |
+| empty "text" | If the value is zero, an empty string, or an empty array, output "text" instead |
 | nonempty "Text" | If the value is non-zero, non-empty string, or non-empty array, output "Text" instead |
-| zero "text"     | If the value is numerically zero, output "text" instead of the value |
-| one "text"      | If the value is numerically one, output "text" instead of the value |
-| many "text"     | If the value is numerically greater than one, output "text" instead of the value |
-| card "a","b"    | If the value is numerically one, output "a" else output "b" |
+| zero "text" | If the value is numerically zero, output "text" instead of the value |
+| one "text" | If the value is numerically one, output "text" instead of the value |
+| many "text" | If the value is numerically greater than one, output "text" instead of the value |
+| card "a","b" | If the value is numerically one, output "a" else output "b" |
 
 These can be combined as needed, and a single value from the map of values can be used multiple
 times in substitution operators. Consider the following text message:
@@ -74,7 +74,7 @@ There are {{count}} rows
 
 In many languages (English included) both the verb and the noun are affected by the cardinality of
 the value of count. Additionally, we might want to specify "no rows" when the count is zero. This
-can all be done in the substitution operations.  If the message was defined as:
+can all be done in the substitution operations. If the message was defined as:
 
 ```text
 There {{count|card is,are}} {{count|empty "no"}} {{count||card row,rows}}.

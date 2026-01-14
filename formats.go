@@ -9,7 +9,7 @@ import (
 
 // handleFormat processes a substitution operator using the supplied list of
 // replacement values in the map. IF the string passed does not have a format
-// operator, the text is returned as-is.  Otherwise, the substitution value
+// operator, the text is returned as-is. Otherwise, the substitution value
 // is read from the map and any formatting operations applied to the value.
 // The value is then returned as a string.
 func handleFormat(text string, subs map[string]any) string {
