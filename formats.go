@@ -115,6 +115,34 @@ func handleFormat(text string, subs map[string]any) string {
 			}
 
 			count := getInt(value)
+			switch actual := value.(type) {
+			case []byte:
+				count = len(actual)
+
+			case []rune:
+				count = len(actual)
+
+			case []int8:
+				count = len(actual)
+
+			case []int16:
+				count = len(actual)
+
+			case []int:
+				count = len(actual)
+
+			case []int64:
+				count = len(actual)
+
+			case []float32:
+				count = len(actual)
+
+			case []float64:
+				count = len(actual)
+
+			case []string:
+				count = len(actual)
+			}
 
 			switch {
 			case count == 0:

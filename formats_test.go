@@ -10,16 +10,34 @@ func Test_handleSub(t *testing.T) {
 		want string
 	}{
 		{
-			name: "short cardinal with value 0",
-			text: `{{value|cardinal frog, frogs}}`,
-			subs: map[string]any{"value": 0},
-			want: "frogs",
-		},
-		{
 			name: "short cardinal with value 1",
 			text: `{{value|cardinal frog, frogs}}`,
 			subs: map[string]any{"value": 1},
 			want: "frog",
+		},
+		{
+			name: "cardinal with string array len 0",
+			text: `{{value|cardinal column, columns}}`,
+			subs: map[string]any{"value": []string{}},
+			want: "columns",
+		},
+		{
+			name: "cardinal with string array len 1",
+			text: `{{value|cardinal column, columns}}`,
+			subs: map[string]any{"value": []string{"a"}},
+			want: "column",
+		},
+		{
+			name: "cardinal with string array len 2",
+			text: `{{value|cardinal column, columns}}`,
+			subs: map[string]any{"value": []string{"a", "b"}},
+			want: "columns",
+		},
+		{
+			name: "short cardinal with value 0",
+			text: `{{value|cardinal frog, frogs}}`,
+			subs: map[string]any{"value": 0},
+			want: "frogs",
 		},
 		{
 			name: "short cardinal with value 7",
